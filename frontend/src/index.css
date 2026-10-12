@@ -1,0 +1,226 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --color-bg: #030712;
+  --color-surface: #0f172a;
+  --color-border: rgba(255, 255, 255, 0.08);
+  --ring-focus: rgba(99, 102, 241, 0.45);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: #030712;
+  background-image:
+    radial-gradient(at 12% 8%, rgba(99, 102, 241, 0.16) 0px, transparent 50%),
+    radial-gradient(at 88% 92%, rgba(168, 85, 247, 0.13) 0px, transparent 50%),
+    radial-gradient(at 50% 50%, rgba(14, 165, 233, 0.07) 0px, transparent 60%);
+  background-attachment: fixed;
+  color: #f1f5f9;
+  font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+  min-height: 100vh;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+  letter-spacing: -0.011em;
+}
+
+/* Subtle premium grid overlay across the whole app */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  background-image:
+    linear-gradient(rgba(148, 163, 184, 0.035) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(148, 163, 184, 0.035) 1px, transparent 1px);
+  background-size: 56px 56px;
+  -webkit-mask-image: radial-gradient(ellipse 80% 60% at 50% 0%, #000 40%, transparent 100%);
+  mask-image: radial-gradient(ellipse 80% 60% at 50% 0%, #000 40%, transparent 100%);
+}
+
+h1, h2, h3 {
+  letter-spacing: -0.025em;
+}
+
+@layer components {
+  /* ---------- Buttons ---------- */
+  .btn-primary {
+    @apply inline-flex items-center justify-center font-semibold text-sm px-5 py-2.5 rounded-xl text-white bg-gradient-to-r from-blue-600 via-indigo-600 to-violet-600 hover:from-blue-500 hover:via-indigo-500 hover:to-violet-500 shadow-lg shadow-indigo-600/25 hover:shadow-indigo-500/40 active:scale-[0.98] transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100 relative overflow-hidden isolate;
+  }
+  /* subtle sheen sweep on hover */
+  .btn-primary::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    background: linear-gradient(120deg, transparent 30%, rgba(255, 255, 255, 0.18) 50%, transparent 70%);
+    transform: translateX(-120%);
+    transition: transform 0.7s ease;
+  }
+  .btn-primary:hover::after {
+    transform: translateX(120%);
+  }
+  .btn-secondary {
+    @apply inline-flex items-center justify-center font-semibold text-sm px-5 py-2.5 rounded-xl text-slate-200 bg-slate-800/80 hover:bg-slate-700/80 border border-slate-700/80 hover:border-slate-600 active:scale-[0.98] transition-all duration-200;
+  }
+  .btn-danger {
+    @apply inline-flex items-center justify-center font-semibold text-sm px-5 py-2.5 rounded-xl text-white bg-gradient-to-r from-rose-600 to-red-600 hover:from-rose-500 hover:to-red-500 shadow-lg shadow-rose-600/25 active:scale-[0.98] transition-all duration-200;
+  }
+  .btn-ghost {
+    @apply inline-flex items-center justify-center font-medium text-sm px-3.5 py-2 rounded-xl text-slate-400 hover:text-white hover:bg-slate-800/60 transition-all duration-200;
+  }
+
+  /* ---------- Cards & Containers ---------- */
+  .card {
+    @apply bg-slate-900/60 backdrop-blur-xl border border-slate-800/80 hover:border-slate-700/60 rounded-2xl p-6 shadow-xl shadow-black/25 transition-all duration-200;
+    position: relative;
+  }
+  .card-glow {
+    @apply relative overflow-hidden bg-slate-900/80 backdrop-blur-xl border border-indigo-500/20 shadow-xl shadow-indigo-950/30 rounded-2xl p-6;
+  }
+  .card-interactive {
+    @apply card hover:-translate-y-1 hover:shadow-2xl hover:shadow-indigo-500/10 cursor-pointer;
+  }
+
+  /* ---------- Form Elements ---------- */
+  .input {
+    @apply w-full bg-slate-950/60 border border-slate-800 focus:border-indigo-500 text-white rounded-xl px-4 py-3 focus:ring-2 focus:ring-indigo-500/25 placeholder-slate-500 text-sm transition-all duration-200;
+    outline: none;
+  }
+  .input:hover {
+    border-color: rgba(100, 116, 139, 0.6);
+  }
+  .label {
+    @apply block text-xs font-semibold uppercase tracking-wider text-slate-400 mb-2;
+  }
+
+  /* ---------- Badges ---------- */
+  .badge-easy {
+    @apply inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold bg-emerald-500/10 text-emerald-400 border border-emerald-500/30 shadow-sm shadow-emerald-950;
+  }
+  .badge-medium {
+    @apply inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold bg-amber-500/10 text-amber-400 border border-amber-500/30 shadow-sm shadow-amber-950;
+  }
+  .badge-hard {
+    @apply inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold bg-orange-500/10 text-orange-400 border border-orange-500/30 shadow-sm shadow-orange-950;
+  }
+  .badge-expert {
+    @apply inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold bg-rose-500/10 text-rose-400 border border-rose-500/30 shadow-sm shadow-rose-950;
+  }
+
+  /* ---------- Gradient Text ---------- */
+  .gradient-text {
+    @apply bg-gradient-to-r from-blue-400 via-indigo-300 to-purple-400 bg-clip-text text-transparent font-extrabold;
+  }
+  .gradient-text-gold {
+    @apply bg-gradient-to-r from-amber-300 via-yellow-200 to-orange-400 bg-clip-text text-transparent font-extrabold;
+  }
+}
+
+/* ---------- Global accessibility focus ring ---------- */
+:focus-visible {
+  outline: 2px solid var(--ring-focus);
+  outline-offset: 2px;
+  border-radius: 6px;
+}
+
+/* ---------- Scrollbar ---------- */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+::-webkit-scrollbar-track {
+  background: #0b0f19;
+}
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(#334155, #1e293b);
+  border-radius: 9999px;
+  border: 1px solid rgba(255, 255, 255, 0.04);
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #475569;
+}
+
+/* Hide scrollbar for horizontal pill rows while keeping scroll */
+.scrollbar-none::-webkit-scrollbar {
+  display: none;
+}
+
+/* ---------- Animations ---------- */
+.animate-fade-in {
+  animation: fadeIn 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+.animate-slide-up {
+  animation: slideUp 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes slideUp {
+  from { opacity: 0; transform: translateY(16px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* ---------- Quiz Option Buttons ---------- */
+.option-btn {
+  @apply w-full text-left p-4 sm:p-5 rounded-2xl border-2 transition-all duration-200 cursor-pointer relative overflow-hidden;
+  border-color: rgba(51, 65, 85, 0.6);
+  background: rgba(15, 23, 42, 0.6);
+  -webkit-backdrop-filter: blur(12px);
+  backdrop-filter: blur(12px);
+  color: #cbd5e1;
+}
+
+.option-btn:hover:not(.selected):not(.correct):not(.incorrect) {
+  border-color: rgba(99, 102, 241, 0.6);
+  background: rgba(99, 102, 241, 0.08);
+  color: #ffffff;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 22px -4px rgba(99, 102, 241, 0.25);
+}
+
+.option-btn.selected {
+  border-color: #6366f1;
+  background: rgba(99, 102, 241, 0.16);
+  color: #ffffff;
+  box-shadow: 0 0 25px -4px rgba(99, 102, 241, 0.4);
+}
+
+.option-btn.correct {
+  border-color: #10b981;
+  background: rgba(16, 185, 129, 0.16);
+  color: #6ee7b7;
+  box-shadow: 0 0 25px -4px rgba(16, 185, 129, 0.4);
+}
+
+.option-btn.incorrect {
+  border-color: #f43f5e;
+  background: rgba(244, 63, 94, 0.16);
+  color: #fda4af;
+  box-shadow: 0 0 25px -4px rgba(244, 63, 94, 0.4);
+}
+
+/* Respect users who prefer reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+}

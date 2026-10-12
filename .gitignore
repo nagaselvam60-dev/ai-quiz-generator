@@ -1,0 +1,39 @@
+# ===== Python / Backend =====
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+venv/
+env/
+
+# Secrets — NEVER commit environment files
+.env
+*.env
+!.env.example
+
+# SQLite database (local data)
+*.sqlite
+*.sqlite3
+*.db
+
+# Ruff / tooling caches
+.ruff_cache/
+.pytest_cache/
+
+# ===== Node / Frontend =====
+node_modules/
+dist/
+dist-ssr/
+*.local
+
+# ===== Editor / OS =====
+.vscode/*
+!.vscode/settings.json
+!.vscode/extensions.json
+.idea/
+.DS_Store
+Thumbs.db
+
+# ===== Logs =====
+*.log
+npm-debug.log*
